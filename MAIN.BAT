@@ -2,25 +2,27 @@
 REM Batch Script Assignment - ID52003 Platforms and Devices
 REM Harley Fletcher - 09002657. Year 1, semester 2, 2026.
 
+REM '2>nul && echo Folder created. || echo Folder already exists.' Error handling to prevent windows error messages popping up if folder already exists.
+
 cls
-call :qa 1 "Outputs name to console window." "Harley Fletcher" 
+echo Question 1: Output name to console.
+echo Answer 1: Harley Fletcher.
+echo.
+pause
 call :filenameAnswer
 :: Creating separate subroutine allows for filename to be dynamically displayed, rather than hardcoding the answer.
 :: Filename assigned when subroutine run, not whole batch script.
 call :mkdirAnswer
 call :mkdirInput
 call :mkdirProcessing
+call :mkdirOutput
+call :listHiddenFiles
+call :backupInputData
+call :goToRootOfC
 pause
 goto :eof
 
-:qa
-echo.
-echo Question %~1: %~2
-echo.
-if not "%~3"=="" echo Answer %~1: %~3
-echo.
-pause
-goto :eof
+
 
 :filenameAnswer
 echo.
@@ -54,5 +56,42 @@ echo Question 5: Create a folder inside 'My Batch Script File Assignment' called
 echo Answer 5: mkdir "C:\My Batch Script File Assignment\Processing"
 mkdir "C:\My Batch Script File Assignment\Processing" 2>nul && echo Folder created. || echo Folder already exists.
 echo.
+pause
+goto :eof
+
+:mkdirOutput
+echo.
+echo Question 6: Create a folder inside 'My Batch Script File Assignment' called 'Output'.
+echo Answer 6: mkdir "C:\My Batch Script File Assignment\Output"
+mkdir "C:\My Batch Script File Assignment\Output" 2>nul && echo Folder created. || echo Folder already exists.
+echo.
+pause
+goto :eof
+
+:listHiddenFiles
+echo.
+echo Question 7: List all hidden files in the root directory of the C: drive and output the listing to a file called 'Input Data.txt' in the 'Input' subfolder.
+echo Answer 7: dir C:\ /a:h ^> "C:\My Batch Script File Assignment\Input\Input Data.txt"
+::The ^ allows > to be treated as a literal character rather redirection. Allows full command to e displayed in console as text.
+dir C:\ /a:h > "C:\My Batch Script File Assignment\Input\Input Data.txt"
+echo.
+pause
+goto :eof
+
+:backupInputData
+echo.
+echo Question 8: A8: Make a backup copy of Input Data.txt on the root of the C: drive, and with the same name, but with extension “.bak”
+echo Answer 8: copy "C:\My Batch Script File Assignment\Input\Input Data.txt" "C:\Input Data.bak"
+copy "C:\My Batch Script File Assignment\Input\Input Data.txt" "C:\Input Data.bak" >nul && echo Backup created. || echo Backup failed.
+echo.
+pause
+goto :eof
+
+:goToRootOfC
+echo.
+echo Question 9: Change the current directory to the root directory of the C: drive from anywhere.
+echo Answer 9: cd /d C:\
+cd /d C:\ && echo Current directory changed to C:\ || echo Failed to change directory.
+echo.   
 pause
 goto :eof
