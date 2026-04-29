@@ -8,6 +8,8 @@ cls
 echo Question 1: Output name to console.
 echo Answer 1: Harley Fletcher.
 echo.
+::Don't need a subroutine for question 1. Originally I was using a for loop to loop through questions and answers. 
+::I swapped to individual subroutines because I couldn't get the loop to display commands in plain text AND execute those commands.
 pause
 call :filenameAnswer
 :: Creating separate subroutine allows for filename to be dynamically displayed, rather than hardcoding the answer.
@@ -19,6 +21,8 @@ call :mkdirOutput
 call :listHiddenFiles
 call :backupInputData
 call :goToRootOfC
+call :updateBatchScriptFolderPath
+call :displayTimeAndHelloWorld
 pause
 goto :eof
 
@@ -93,5 +97,23 @@ echo Question 9: Change the current directory to the root directory of the C: dr
 echo Answer 9: cd /d C:\
 cd /d C:\ && echo Current directory changed to C:\ || echo Failed to change directory.
 echo.   
+pause
+goto :eof
+
+:updateBatchScriptFolderPath
+echo.
+echo Question 10: Update the folder search path for batch script file execution to include the “Processing” subfolder, and then display the folder search path. 
+echo Answer 10: set PATH=%PATH%;C:\My Batch Script File Assignment\Processing
+set PATH=%PATH%;C:\My Batch Script File Assignment\Processing && echo Folder search path updated. || echo Failed to update folder search path.
+echo Filepath updated. Current path is: %PATH%.
+echo.
+pause
+goto :eof
+
+:displayTimeAndHelloWorld
+echo.
+echo Question 11: Change the command prompt to include the time, the words “Hello World” and the '>' character.
+echo Answer 11: Current time: %TIME% Hello World>
+echo.
 pause
 goto :eof
