@@ -23,6 +23,8 @@ call :backupInputData
 call :goToRootOfC
 call :updateBatchScriptFolderPath
 call :displayTimeAndHelloWorld
+call :newWindowRedTextGreenBackground
+call:blueTextWhiteBackgroundVersionNum
 pause
 goto :eof
 
@@ -40,7 +42,7 @@ goto :eof
 echo.
 echo Question 3: Create a folder called 'My Batch Script File Assignment' in the C drive.
 echo Answer 3: mkdir "C:\My Batch Script File Assignment"
-mkdir "C:\My Batch Script File Assignment" 2>nul && echo Folder created. || echo Folder already exists.
+mkdir "C:\My Batch Script File Assignment" 2>nul && echo Folder has been created. || echo This folder already exists.   
 echo.
 pause
 goto :eof
@@ -49,7 +51,7 @@ goto :eof
 echo.
 echo Question 4: Create a folder called 'Input' inside the 'My Batch Script File Assignment' folder.
 echo Answer 4: mkdir "C:\My Batch Script File Assignment\Input"
-mkdir "C:\My Batch Script File Assignment\Input" 2>nul && echo Folder created. || echo Folder already exists.
+mkdir "C:\My Batch Script File Assignment\Input" 2>nul && echo Folder has been created. || echo This folder already exists.
 echo.
 pause
 goto :eof
@@ -58,7 +60,7 @@ goto :eof
 echo.
 echo Question 5: Create a folder inside 'My Batch Script File Assignment' called 'Processing'.
 echo Answer 5: mkdir "C:\My Batch Script File Assignment\Processing"
-mkdir "C:\My Batch Script File Assignment\Processing" 2>nul && echo Folder created. || echo Folder already exists.
+mkdir "C:\My Batch Script File Assignment\Processing" 2>nul && echo Folder has been created. || echo This folder already exists.
 echo.
 pause
 goto :eof
@@ -67,7 +69,7 @@ goto :eof
 echo.
 echo Question 6: Create a folder inside 'My Batch Script File Assignment' called 'Output'.
 echo Answer 6: mkdir "C:\My Batch Script File Assignment\Output"
-mkdir "C:\My Batch Script File Assignment\Output" 2>nul && echo Folder created. || echo Folder already exists.
+mkdir "C:\My Batch Script File Assignment\Output" 2>nul && echo Folder has been created. || echo This folder already exists.
 echo.
 pause
 goto :eof
@@ -84,7 +86,7 @@ goto :eof
 
 :backupInputData
 echo.
-echo Question 8: A8: Make a backup copy of Input Data.txt on the root of the C: drive, and with the same name, but with extension “.bak”
+echo Question 8: A8: Make a backup copy of Input Data.txt on the root of the C: drive, and with the same name, but with extension '.bak'
 echo Answer 8: copy "C:\My Batch Script File Assignment\Input\Input Data.txt" "C:\Input Data.bak"
 copy "C:\My Batch Script File Assignment\Input\Input Data.txt" "C:\Input Data.bak" >nul && echo Backup created. || echo Backup failed.
 echo.
@@ -102,10 +104,12 @@ goto :eof
 
 :updateBatchScriptFolderPath
 echo.
-echo Question 10: Update the folder search path for batch script file execution to include the “Processing” subfolder, and then display the folder search path. 
-echo Answer 10: set PATH=%PATH%;C:\My Batch Script File Assignment\Processing
-set PATH=%PATH%;C:\My Batch Script File Assignment\Processing && echo Folder search path updated. || echo Failed to update folder search path.
-echo Filepath updated. Current path is: %PATH%.
+echo Question 10: Update the folder search path for batch script file execution to include the 'Processing' subfolder, and then display the folder search path. 
+echo Answer 10: set PATH=^%PATH^%;C:\My Batch Script File Assignment\Processing
+echo.
+set PATH=%PATH%;C:\My Batch Script File Assignment\Processing
+echo Folder search path updated.
+echo Filepath has been updated. Current path is - %PATH%.
 echo.
 pause
 goto :eof
@@ -113,7 +117,25 @@ goto :eof
 :displayTimeAndHelloWorld
 echo.
 echo Question 11: Change the command prompt to include the time, the words “Hello World” and the '>' character.
-echo Answer 11: Current time: %TIME% Hello World>
+prompt $T  Hello World $P$G
+echo Current command prompt is: %PROMPT%
+echo.
+pause
+goto :eof
+
+:newWindowRedTextGreenBackground
+echo.
+echo Question 12: Create a new command window with red coloured text and a green background.
+start cmd  /T:24 /K echo "This new window should have the time and 'Hello world' in the prompt. Red rext and a green background."
+echo.
+pause
+goto :eof
+
+:blueTextWhiteBackgroundVersionNum
+echo.
+echo Question 13: Create a new command window with blue text and a bright white background. Include Windows version number in prompt.
+start cmd /T:F1 /K "PROMPT ver [%winver%] $P$G
+echo This new window should have the time and 'Hello world' in the prompt. Blue text and a bright white background.
 echo.
 pause
 goto :eof
