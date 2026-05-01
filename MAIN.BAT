@@ -24,7 +24,9 @@ call :goToRootOfC
 call :updateBatchScriptFolderPath
 call :displayTimeAndHelloWorld
 call :newWindowRedTextGreenBackground
-call:blueTextWhiteBackgroundVersionNum
+call :blueTextWhiteBackgroundVersionNum
+call :alphabeticallySortedFoldersFromSysten32
+call :listOfTextFilesUpTo7CharLongInC
 pause
 goto :eof
 
@@ -117,7 +119,7 @@ goto :eof
 :displayTimeAndHelloWorld
 echo.
 echo Question 11: Change the command prompt to include the time, the words “Hello World” and the '>' character.
-prompt $T  Hello World $P$G
+prompt $T  Hello World $G$P
 echo Current command prompt is: %PROMPT%
 echo.
 pause
@@ -134,8 +136,29 @@ goto :eof
 :blueTextWhiteBackgroundVersionNum
 echo.
 echo Question 13: Create a new command window with blue text and a bright white background. Include Windows version number in prompt.
-start cmd /T:F1 /K "PROMPT ver [%winver%] $P$G
+start cmd /T:F1 /K "PROMPT $V$P$G"
 echo This new window should have the time and 'Hello world' in the prompt. Blue text and a bright white background.
+echo.
+pause
+goto :eof
+
+:alphabeticallySortedFoldersFromSysten32
+echo.
+echo Question 14: Save all folders from system32 into text document 'Output\Batch Script File Output Data.txt' saved in Outputs. Folders sorted alphabetically.
+dir /B /AD /O:N C:\Windows\System32 > "C:\My Batch Script File Assignment\Output\Batch Script File Output Data.txt"
+echo Commands used: dir /B /AD /O:N C:\Windows\System32 ^> "C:\My Batch Script File Assignment\Output\Batch Script File Output Data.txt"
+echo.
+pause
+goto :eof
+
+:listOfTextFilesUpTo7CharLongInC
+echo.
+echo Question 15: List all text files on the whole C: drive with names up to seven characters long. List of text file names to be added to the end of previously created text file 'Batch Script File Output Data.txt' in Output.
+setlocal enabledelayedexpansion
+for /R "C:\" %%i in (*.txt) do(
+    set name=%%~ni
+    if "!name:~7" == "" echo %%i
+) >> "C:\My Batch Script File Assignment\Output\Batch Script File Output Data.txt"
 echo.
 pause
 goto :eof
